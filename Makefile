@@ -57,6 +57,11 @@ gorun:
 	go run main.go harisekhon
 	if uname -s | grep -q Darwin; then open graph.png; fi
 
+.PHONY: goupdates
+goupdates:
+	go get -u all
+	go mod tidy
+
 .PHONY: init
 init:
 	@echo
