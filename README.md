@@ -75,7 +75,7 @@ Will fetch all public non-fork repos and for each one the commit log to generate
 
 ## Result
 
-![Commit Hours Graph](graph.png)
+![Commit Hours Graph](graph.svg)
 
 ## More Core Repos
 
