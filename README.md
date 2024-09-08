@@ -14,7 +14,7 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_GitHub-Commit-Times-Graph&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_GitHub-Commit-Times-Graph)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_GitHub-Commit-Times-Graph&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_GitHub-Commit-Times-Graph)
 
-![Python](https://img.shields.io/badge/Python-3-blue?logo=python&logoColor=white)
+![Golang](https://img.shields.io/badge/Golang-1.23-blue?logo=go&logoColor=white)
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 
