@@ -126,7 +126,8 @@ func generateGraph(hourlyCommits [24]int, outputFile string) error {
 	barChart.Color = plotter.DefaultLineStyle.Color
 	p.Add(barChart)
 
-	p.NominalX("00",
+	p.NominalX(
+		"00",
 		"01",
 		"02",
 		"03",
