@@ -32,6 +32,8 @@ import (
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/plotter"
 	"gonum.org/v1/plot/vg"
+	"gonum.org/v1/plot/vg/vgsvg"
+	"gonum.org/v1/plot/vg/draw"
 )
 
 // Fetch all commits from a repository with pagination
@@ -104,7 +106,7 @@ func processCommits(commits []*github.RepositoryCommit, usernameFilter string) [
 	return hourlyCommits
 }
 
-// Generate a bar graph and save it as a PNG file
+// Generate a bar graph and save it as an SVG file
 func generateGraph(hourlyCommits [24]int, outputFile, usernameFilter, repoFilter string) error {
 	p := plot.New()
 
@@ -136,10 +138,26 @@ func generateGraph(hourlyCommits [24]int, outputFile, usernameFilter, repoFilter
 	// Set the x-axis labels to represent hours (0-23)
 	p.NominalX("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23")
 
-	// Save the plot to a PNG file
-	if err := p.Save(10*vg.Inch, 4*vg.Inch, outputFile); err != nil {
+	// Create the SVG canvas with the correct width and height
+	width := vg.Inch * 10
+	height := vg.Inch * 4
+	canvas := vgsvg.New(width, height)
+
+	// Draw the plot on the canvas
+	p.Draw(draw.New(canvas))
+
+	// Save the SVG to the file
+	w, err := os.Create(outputFile)
+	if err != nil {
 		return err
 	}
+	defer w.Close()
+
+	_, err = canvas.WriteTo(w)
+	if err != nil {
+		return err
+	}
+
 	fmt.Printf("Graph saved to %s\n", outputFile)
 	return nil
 }
@@ -149,8 +167,8 @@ func showUsage() {
 	fmt.Println("Usage: go run main.go [options] [<username>] <repo1> <repo2> ...")
 	fmt.Println("Options:")
 	fmt.Println("  --user <username/email>    Filter commits by a specific username or email")
-	fmt.Println("  --repo <owner/repo>        Filter commits by a specific repository")
-	fmt.Println("  -o, --output <file>        Output file for the graph (default: graph.png)")
+	fmt.Println("  --repo <owner/repo>        Filter commits by specific repository (format: 'owner/repo')")
+	fmt.Println("  -o, --output <file>        Output file for the graph (default: graph.svg)")
 	fmt.Println("  -h, --help                 Show this help message")
 	fmt.Println("Repos:")
 	fmt.Println("  Provide repositories in the format 'owner/repo'.")
@@ -162,7 +180,7 @@ func main() {
 	var userFilter, repoFilter, outputFile string
 	flag.StringVar(&userFilter, "user", "", "Filter commits by a specific username or email")
 	flag.StringVar(&repoFilter, "repo", "", "Filter commits by specific repository (format: 'owner/repo')")
-	flag.StringVar(&outputFile, "output", "graph.png", "Output file for the graph")
+	flag.StringVar(&outputFile, "output", "graph.svg", "Output file for the graph")
 	helpFlag := flag.Bool("help", false, "Show help")
 	flag.BoolVar(helpFlag, "h", false, "Show help")
 	flag.Parse()
