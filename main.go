@@ -92,8 +92,8 @@ func processCommits(commits []*github.RepositoryCommit, usernameFilter string) [
 		}
 
 		if usernameFilter != "" &&
-		   commit.Commit.Committer.GetName() != usernameFilter &&
-		   commit.Commit.Committer.GetEmail() != usernameFilter {
+			commit.Commit.Committer.GetName() != usernameFilter &&
+			commit.Commit.Committer.GetEmail() != usernameFilter {
 			continue
 		}
 
@@ -127,29 +127,29 @@ func generateGraph(hourlyCommits [24]int, outputFile string) error {
 	p.Add(barChart)
 
 	p.NominalX("00",
-			   "01",
-			   "02",
-			   "03",
-			   "04",
-			   "05",
-			   "06",
-			   "07",
-			   "08",
-			   "09",
-			   "10",
-			   "11",
-			   "12",
-			   "13",
-			   "14",
-			   "15",
-			   "16",
-			   "17",
-			   "18",
-			   "19",
-			   "20",
-			   "21",
-			   "22",
-			   "23")
+		"01",
+		"02",
+		"03",
+		"04",
+		"05",
+		"06",
+		"07",
+		"08",
+		"09",
+		"10",
+		"11",
+		"12",
+		"13",
+		"14",
+		"15",
+		"16",
+		"17",
+		"18",
+		"19",
+		"20",
+		"21",
+		"22",
+		"23")
 
 	if err := p.Save(10*vg.Inch, 4*vg.Inch, outputFile); err != nil {
 		return err
