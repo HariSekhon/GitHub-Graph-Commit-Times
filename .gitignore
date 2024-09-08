@@ -1,3 +1,4 @@
 github-commit-times
 #*.png
 !graph.png
+!graph.svg
