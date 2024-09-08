@@ -1,5 +1,6 @@
 ///bin/sh -c true; exec /usr/bin/env go run "$0" "$@"
 //  vim:ts=4:sts=4:sw=4:noet
+//  args: harisekhon
 //
 //  Author: Hari Sekhon
 //  Date: 2024-09-08 02:24:45 +0200 (Sun, 08 Sep 2024)
@@ -22,7 +23,7 @@ import (
 	"log"
 	"os"
 	"strings"
-	"time"
+	//"time"
 
 	"github.com/google/go-github/v41/github"
 	"golang.org/x/oauth2"
