@@ -150,7 +150,8 @@ func generateGraph(hourlyCommits [24]int, outputFile string) error {
 		"20",
 		"21",
 		"22",
-		"23")
+		"23"
+	)
 
 	if err := p.Save(10*vg.Inch, 4*vg.Inch, outputFile); err != nil {
 		return err
