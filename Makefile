@@ -55,7 +55,7 @@ build: init
 .PHONY: gorun
 gorun:
 	go run main.go harisekhon
-	if uname -s | grep Darwin; then open graph.png; fi
+	if uname -s | grep -q Darwin; then open graph.png; fi
 
 .PHONY: init
 init:
