@@ -52,8 +52,10 @@ build: init
 	go build -o "$(BINARY)" main.go
 	@echo 'BUILD SUCCESSFUL (GitHub-Commit-Times-Graph)'
 
-run:
-	go run main.go $(ARGS)
+.PHONY: gorun
+gorun:
+	go run main.go harisekhon
+	if uname -s | grep Darwin; then open graph.png; fi
 
 .PHONY: init
 init:
