@@ -73,6 +73,10 @@ Will fetch all public non-fork repos and for each one the commit log to generate
 ./github-commit-times harisekhon
 ```
 
+## Result
+
+![Commit Hours Graph](graph.png)
+
 ## More Core Repos
 
 <!-- OTHER_REPOS_START -->
