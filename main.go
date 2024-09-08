@@ -117,7 +117,7 @@ func generateGraph(hourlyCommits [24]int, outputFile string) error {
 
 // Show usage help
 func showUsage() {
-	fmt.Println("Usage: go run main.go [options] <repo1> <repo2> ...")
+	fmt.Println("Usage: go run main.go [options] [<username>] <repo1> <repo2> ...")
 	fmt.Println("Options:")
 	fmt.Println("  --user <username/email>    Filter commits by a specific username or email")
 	fmt.Println("  -o, --output <file>        Output file for the graph (default: graph.png)")
