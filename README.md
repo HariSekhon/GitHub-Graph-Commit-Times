@@ -57,15 +57,21 @@ This Go program generates a graphical representation (PNG) of commit activity by
 - Option to filter commits by username or email
 - Saves output as a PNG graph
 
-## Installation
+## Build
 
-To install the required dependencies:
+To compile the binary:
 
 ```shell
-go mod tidy
+make
 ```
 
-#### Ensure to update Codacy Grade link manually after adding this repo to Codacy since the link is a hash and therefore cannot be predicted for replacement by `./customize.sh`.
+## Run
+
+Will fetch all public non-fork repos and for each one the commit log to generate the commits for the graph.
+
+```shell
+./github-commit-times harisekhon
+```
 
 ## More Core Repos
 
