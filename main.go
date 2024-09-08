@@ -14,6 +14,9 @@
 //  https://www.linkedin.com/in/HariSekhon
 //
 
+//go:build !debug
+// +build !debug
+
 package main
 
 import (
@@ -23,7 +26,6 @@ import (
 	"log"
 	"os"
 	"strings"
-	//"time"
 
 	"github.com/google/go-github/v41/github"
 	"golang.org/x/oauth2"
@@ -32,34 +34,55 @@ import (
 	"gonum.org/v1/plot/vg"
 )
 
-// Fetch commits from a repository
+// Fetch all commits from a repository with pagination
 func fetchCommits(client *github.Client, owner, repo string) ([]*github.RepositoryCommit, error) {
-	commits, _, err := client.Repositories.ListCommits(context.Background(), owner, repo, nil)
-	if err != nil {
-		return nil, err
-	}
-	return commits, nil
-}
+	var allCommits []*github.RepositoryCommit
+	opt := &github.CommitsListOptions{ListOptions: github.ListOptions{PerPage: 100}}
 
-// Fetch all public, non-fork repositories for a user
-func fetchUserRepos(client *github.Client, user string) ([]*github.Repository, error) {
-	opts := &github.RepositoryListOptions{Type: "public"}
-	repos, _, err := client.Repositories.List(context.Background(), user, opts)
-	if err != nil {
-		return nil, err
-	}
-
-	// Filter out forked repositories
-	var publicRepos []*github.Repository
-	for _, repo := range repos {
-		if !repo.GetFork() {
-			publicRepos = append(publicRepos, repo)
+	for {
+		commits, resp, err := client.Repositories.ListCommits(context.Background(), owner, repo, opt)
+		if err != nil {
+			return nil, err
 		}
+
+		allCommits = append(allCommits, commits...)
+
+		if resp.NextPage == 0 {
+			break
+		}
+		opt.Page = resp.NextPage
 	}
-	return publicRepos, nil
+
+	return allCommits, nil
 }
 
-// Parse commit timestamps and aggregate commits by hour
+// Fetch all public, non-fork repositories for a user with pagination
+func fetchUserRepos(client *github.Client, user string) ([]*github.Repository, error) {
+	var allRepos []*github.Repository
+	opt := &github.RepositoryListOptions{Type: "public", ListOptions: github.ListOptions{PerPage: 100}}
+
+	for {
+		repos, resp, err := client.Repositories.List(context.Background(), user, opt)
+		if err != nil {
+			return nil, err
+		}
+
+		for _, repo := range repos {
+			if !repo.GetFork() {
+				allRepos = append(allRepos, repo)
+			}
+		}
+
+		if resp.NextPage == 0 {
+			break
+		}
+		opt.Page = resp.NextPage
+	}
+
+	return allRepos, nil
+}
+
+// Process commits and aggregate by hour
 func processCommits(commits []*github.RepositoryCommit, usernameFilter string) [24]int {
 	hourlyCommits := [24]int{}
 
@@ -68,7 +91,6 @@ func processCommits(commits []*github.RepositoryCommit, usernameFilter string) [
 			continue
 		}
 
-		// If filtering by user, skip commits not by the user
 		if usernameFilter != "" && commit.Commit.Committer.GetName() != usernameFilter && commit.Commit.Committer.GetEmail() != usernameFilter {
 			continue
 		}
@@ -85,12 +107,10 @@ func processCommits(commits []*github.RepositoryCommit, usernameFilter string) [
 // Generate a bar graph and save it as a PNG file
 func generateGraph(hourlyCommits [24]int, outputFile string) error {
 	p := plot.New()
-
 	p.Title.Text = "GitHub Commits by Hour"
 	p.X.Label.Text = "Hour of Day"
 	p.Y.Label.Text = "Number of Commits"
 
-	// Create the bar data
 	values := make(plotter.Values, 24)
 	for i := 0; i < 24; i++ {
 		values[i] = float64(hourlyCommits[i])
@@ -104,10 +124,8 @@ func generateGraph(hourlyCommits [24]int, outputFile string) error {
 	barChart.Color = plotter.DefaultLineStyle.Color
 	p.Add(barChart)
 
-	// Set the x-axis labels to represent hours (0-23)
 	p.NominalX("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23")
 
-	// Save the plot to a PNG file
 	if err := p.Save(10*vg.Inch, 4*vg.Inch, outputFile); err != nil {
 		return err
 	}
@@ -129,7 +147,6 @@ func showUsage() {
 }
 
 func main() {
-	// Parse command-line flags
 	var userFilter string
 	var outputFile string
 	flag.StringVar(&userFilter, "user", "", "Filter commits by a specific username or email")
@@ -138,19 +155,16 @@ func main() {
 	flag.BoolVar(helpFlag, "h", false, "Show help")
 	flag.Parse()
 
-	// Show help if -h or --help is provided
 	if *helpFlag {
 		showUsage()
 	}
 
-	// Get remaining arguments as repo inputs
 	repoArgs := flag.Args()
 	if len(repoArgs) == 0 {
 		fmt.Println("Error: No repositories provided.")
 		showUsage()
 	}
 
-	// GitHub token setup
 	token := os.Getenv("GITHUB_TOKEN")
 	if token == "" {
 		log.Fatal("Error: GITHUB_TOKEN environment variable is not set.")
@@ -161,13 +175,10 @@ func main() {
 	tc := oauth2.NewClient(ctx, ts)
 	client := github.NewClient(tc)
 
-	// To store aggregated commit data per hour
 	hourlyCommits := [24]int{}
 
-	// Process each repository or user input
 	for _, repoArg := range repoArgs {
 		if strings.Contains(repoArg, "/") {
-			// Assume the format is "owner/repo"
 			parts := strings.Split(repoArg, "/")
 			if len(parts) != 2 {
 				log.Fatalf("Invalid repository format: %s (expected 'owner/repo')", repoArg)
@@ -186,7 +197,6 @@ func main() {
 				hourlyCommits[hour] += repoHourlyCommits[hour]
 			}
 		} else {
-			// Assume it's a GitHub username, fetch all public non-fork repos
 			user := repoArg
 			fmt.Printf("Fetching public non-fork repos for user %s...\n", user)
 			repos, err := fetchUserRepos(client, user)
@@ -209,7 +219,6 @@ func main() {
 		}
 	}
 
-	// Generate the graph and save it as a PNG file
 	if err := generateGraph(hourlyCommits, outputFile); err != nil {
 		log.Fatalf("Error generating graph: %v", err)
 	}
