@@ -1,4 +1,4 @@
-# Hari Sekhon - GitHub-Commit-Times-Graph
+# Hari Sekhon - GitHub Commit Times Graph
 
 [![GitHub stars](https://img.shields.io/github/stars/HariSekhon/GitHub-Commit-Times-Graph?logo=github)](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/HariSekhon/GitHub-Commit-Times-Graph?logo=github)](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/network)
@@ -48,19 +48,24 @@ TODO: update Codacy grade link below - it's a hash so cannot be predicted to rep
 [![SonarCloud](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/actions/workflows/sonarcloud.yaml/badge.svg)](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/actions/workflows/sonarcloud.yaml)
 [![Trivy](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/actions/workflows/trivy.yaml/badge.svg)](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/actions/workflows/trivy.yaml)
 
+## GitHub Repo Commit Graph
 
-## PUT CONTENT HERE
+This Go program generates a graphical representation (PNG) of commit activity by hour for any number of GitHub repositories. It can also filter commits by a specific user or email.
 
-### Customize Repo in 1 Command
+## Features
 
-Run this script to replace the repo name and workflow URL references across the configurations for CI/CD and
-other variety of files in this repo:
+- Fetch commits from multiple GitHub repositories
+- Visualize commits by hour (0-23)
+- Option to filter commits by username or email
+- Saves output as a PNG graph
+
+## Installation
+
+To install the required dependencies:
 
 ```shell
-./customize.sh <new_repo_name>
+go mod tidy
 ```
-
-Then delete the script and edit this README.
 
 #### Ensure to update Codacy Grade link manually after adding this repo to Codacy since the link is a hash and therefore cannot be predicted for replacement by `./customize.sh`.
 
