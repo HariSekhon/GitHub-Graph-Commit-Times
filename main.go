@@ -23,6 +23,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"image/color"
 	"log"
 	"os"
 	"strings"
@@ -132,7 +133,9 @@ func generateGraph(hourlyCommits [24]int, outputFile, usernameFilter, repoFilter
 		return err
 	}
 
-	barChart.Color = plotter.DefaultLineStyle.Color
+	// Set the bar color to blue
+	barChart.Color = color.RGBA{R: 0, G: 0, B: 255, A: 255} // Blue color
+
 	p.Add(barChart)
 
 	// Set the x-axis labels to represent hours (0-23)
