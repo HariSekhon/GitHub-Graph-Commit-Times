@@ -13,7 +13,7 @@
 //  https://www.linkedin.com/in/HariSekhon
 //
 
-module github.com/yourusername/github-repo-commit-graph
+module github.com/harisekhon/github-commit-times
 
 go 1.23
 
