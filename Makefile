@@ -44,9 +44,9 @@ BINARY=github-commit-times
 
 .PHONY: build
 build: init
-	@echo ================
+	@echo ================================
 	@echo GitHub-Commit-Times-Graph Builds
-	@echo ================
+	@echo ================================
 	@$(MAKE) git-summary
 	@echo
 	go build -o "$(BINARY)" main.go
