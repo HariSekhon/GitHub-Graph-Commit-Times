@@ -42,6 +42,12 @@ CODE_FILES := $(shell git ls-files | grep -E -e '\.sh$$' -e '\.go$$' | sort)
 
 BINARY=github-graph-commit-times
 
+.PHONY: default
+default:
+	go run main.go harisekhon
+	@#if uname -s | grep -q Darwin; then open graph.png; fi
+	if uname -s | grep -q Darwin; then open graph.svg; fi
+
 .PHONY: build
 build: init
 	@echo ================================
@@ -51,12 +57,6 @@ build: init
 	@echo
 	go build -o "$(BINARY)" main.go
 	@echo 'BUILD SUCCESSFUL (GitHub-Graph-Commit-Times)'
-
-.PHONY: gorun
-gorun:
-	go run main.go harisekhon
-	@#if uname -s | grep -q Darwin; then open graph.png; fi
-	if uname -s | grep -q Darwin; then open graph.svg; fi
 
 .PHONY: goupdates
 goupdates:
