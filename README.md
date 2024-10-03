@@ -1,4 +1,4 @@
-# Hari Sekhon - GitHub Commit Times Graph
+# Hari Sekhon - GitHub Graph Commit Times
 
 [![GitHub stars](https://img.shields.io/github/stars/HariSekhon/GitHub-Commit-Times-Graph?logo=github)](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/HariSekhon/GitHub-Commit-Times-Graph?logo=github)](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/network)
@@ -46,31 +46,68 @@
 [![SonarCloud](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/actions/workflows/sonarcloud.yaml/badge.svg)](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/actions/workflows/sonarcloud.yaml)
 [![Trivy](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/actions/workflows/trivy.yaml/badge.svg)](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/actions/workflows/trivy.yaml)
 
-## GitHub Repo Commit Graph
+## GitHub Graph Commit Times
 
-This Go program generates a graphical representation (PNG) of commit activity by hour for any number of GitHub repositories. It can also filter commits by a specific user or email.
+This Golang program generates a graphical representation (SVG) of commit activity by hour for any number of GitHub
+repositories.
+
+It can also filter commits by a specific user or email.
+
+There is also a similar version in Bash in the
+[HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-tools) repo.
+
+<!-- INDEX_START -->
+
+- [GitHub Graph Commit Times](#github-graph-commit-times)
+- [Features](#features)
+- [Run](#run)
+- [Build](#build)
+  - [Run Binary](#run-binary)
+- [Result](#result)
+- [More Core Repos](#more-core-repos)
+  - [Knowledge](#knowledge)
+  - [DevOps Code](#devops-code)
+  - [Containerization](#containerization)
+  - [CI/CD](#cicd)
+  - [DBA - SQL](#dba---sql)
+  - [DevOps Reloaded](#devops-reloaded)
+  - [Misc](#misc)
+
+<!-- INDEX_END -->
 
 ## Features
 
 - Fetch commits from multiple GitHub repositories
 - Visualize commits by hour (0-23)
 - Option to filter commits by username or email
-- Saves output as a PNG graph
+- Saves output as an SVG graph
+
+## Run
+
+```shell
+go run main.go <username>
+```
+
+eg.
+
+```shell
+go run main.go harisekhon
+```
 
 ## Build
 
-To compile the binary:
+To compile a portable binary:
 
 ```shell
-make
+make build
 ```
 
-## Run
+### Run Binary
 
 Will fetch all public non-fork repos and for each one the commit log to generate the commits for the graph.
 
 ```shell
-./github-commit-times harisekhon
+./github-graph-commit-times harisekhon
 ```
 
 ## Result
