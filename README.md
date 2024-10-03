@@ -8,8 +8,8 @@
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/GitHub-Commit-Times-Graph?logo=github)](https://github.com/HariSekhon/GitHub-Commit-Times-Graph/commits/master)
 
 [![Codacy](https://app.codacy.com/project/badge/Grade/62df1805c7794d7784f853fea4a70cbf)](https://app.codacy.com/gh/HariSekhon/GitHub-Commit-Times-Graph/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-[![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/GitHub-Commit-Times-Graph/badge)](https://www.codefactor.io/repository/github/harisekhon/GitHub-Commit-Times-Graph)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_GitHub-Commit-Times-Graph&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_GitHub-Commit-Times-Graph)
+[![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/GitHub-Graph-Commit-Times/badge)](https://www.codefactor.io/repository/github/harisekhon/GitHub-Graph-Commit-Times)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_GitHub-Graph-Commit-Times&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_GitHub-Graph-Commit-Times)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_GitHub-Commit-Times-Graph&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_GitHub-Commit-Times-Graph)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_GitHub-Commit-Times-Graph&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_GitHub-Commit-Times-Graph)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_GitHub-Commit-Times-Graph&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_GitHub-Commit-Times-Graph)
