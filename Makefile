@@ -40,7 +40,7 @@ REPO := HariSekhon/GitHub-Commit-Times-Graph
 
 CODE_FILES := $(shell git ls-files | grep -E -e '\.sh$$' -e '\.go$$' | sort)
 
-BINARY=github-commit-times
+BINARY=github-graph-commit-times
 
 .PHONY: build
 build: init
