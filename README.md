@@ -64,6 +64,8 @@ There is also a similar version in Bash in the
 - [Build](#build)
   - [Run Binary](#run-binary)
 - [Result](#result)
+- [Caveats](#caveats)
+  - [GitHub API returns Times in UTC](#github-api-returns-times-in-utc)
 - [More Core Repos](#more-core-repos)
   - [Knowledge](#knowledge)
   - [DevOps Code](#devops-code)
@@ -115,6 +117,19 @@ Will fetch all public non-fork repos and for each one the commit log to generate
 `graph.svg`:
 
 ![Commit Hours Graph](graph.svg)
+
+## Caveats
+
+### GitHub API returns Times in UTC
+
+...and there is no way to know the original timezone of the programmer this way.
+
+Scripts `git/git_graph_commit_times_*.sh` that generate graphs from local git repo checkouts in the
+[DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-tools) repo will get local timezone hours from the local
+`git log` in each checkout, but this only works if you have all the repos checked out locally so requires much more
+admin than querying the GitHub API.
+
+[This issue](https://github.com/orgs/community/discussions/140651) has been raised against GitHub API.
 
 ## More Core Repos
 
