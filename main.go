@@ -119,7 +119,7 @@ func generateGraph(hourlyCommits [24]int, outputFile, usernameFilter, repoFilter
 	} else {
 		p.Title.Text = "GitHub Commits by Hour"
 	}
-	p.X.Label.Text = "Hour of Day"
+	p.X.Label.Text = "Hour of Day (UTC)"
 	p.Y.Label.Text = "Number of Commits"
 
 	// Create the bar data
